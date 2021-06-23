@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: springappcontainer
-        image:  femijohn/spring-boot-mongo:1
+        image:  femijohn/myapp:2
         ports:
         - containerPort: 8080
         env:
