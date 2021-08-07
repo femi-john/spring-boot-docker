@@ -26,6 +26,7 @@ docker build -t mylandmarktech/springapp .
 
 ```docker-compose 
 docker-compose up -d 
+# -d detachageable
 ```
 
 ## List Docker Containers
