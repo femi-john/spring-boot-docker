@@ -52,38 +52,36 @@ spec:
       storage: 16Gi
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: ReplicaSet
 metadata:
-  name: mongodbss
+  name: mongodbrs
 spec:
   selector:
     matchLabels:
       app: mongodb
-  serviceName: mongodb
-  replicas: 2
   template:
-    metadata:
-      name: mongodbpod
-      labels:
-        app: mongodb
-    spec:
-      volumes: 
-      - name: pvc
-        persistentVolumeClaim:
-          claimName: mongodbpvc
-      containers:
-      - name: mongodbcontainer
-        image: mongo
-        ports:
-        - containerPort: 27017
-        env:
-        - name: MONGO_INITDB_ROOT_USERNAME
-          value: devdb
-        - name: MONGO_INITDB_ROOT_PASSWORD
-          value: devdb@123
-        volumeMounts:
-        - name: pvc
-          mountPath: /data/db   
+     metadata:
+       name: mongodbpod
+       labels:
+         app: mongodb
+     spec:
+       volumes:
+       - name: pvc
+         persistentVolumeClaim:
+           claimName: mongodbpvc     
+       containers:
+       - name: mongodbcontainer
+         image: mongo
+         ports:
+         - containerPort: 27017
+         env:
+         - name: MONGO_INITDB_ROOT_USERNAME
+           value: devdb
+         - name: MONGO_INITDB_ROOT_PASSWORD
+           value: devdb@123
+         volumeMounts:
+         - name: pvc
+           mountPath: /data/db
 ---
 apiVersion: v1
 kind: Service
