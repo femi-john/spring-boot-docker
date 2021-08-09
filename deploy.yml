@@ -1,15 +1,15 @@
 - hosts: Docker
-   become: true
-   tasks:
-   - name: Transfer the app code to Docker
-     copy:
-       src=/var/lib/jenkins/workspace/pipeline-docker/target/spring-boot-mongo-1.0.jar
-       dest=/home/ubuntu
-     ignore_errors: yes
+  become: true
+  tasks:
+  - name: Transfer the app code to Docker
+    copy:
+      src=/var/lib/jenkins/workspace/pipeline-docker/target/spring-boot-mongo-1.0.jar
+      dest=/home/ubuntu
+    ignore_errors: yes
      
-   - name: building docker image
-     command: docker build -t app-image:1
+  - name: building docker image
+    command: docker build -t app-image:1
 
-   - name: Creating Docker Container
-     command: docker run -d --name java-app -p 90000:8080 app-image:1
-     ignore_errors: yes
+  - name: Creating Docker Container
+    command: docker run -d --name java-app -p 90000:8080 app-image:1
+    ignore_errors: yes
