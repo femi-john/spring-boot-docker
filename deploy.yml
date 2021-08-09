@@ -13,3 +13,16 @@
   - name: Creating Docker Container
     command: docker run -d --name java-app -p 90000:8080 app-image:1
     ignore_errors: yes
+    
+    
+    
+  - name: deploying app as a docker container
+           docker_container:
+             name: java-app
+             image: mylandmarktech/spring-boot-mongo
+             state: present
+             recreate: yes
+             port:
+               - "8080:8080"
+           ignore_errors: yes
+ 
