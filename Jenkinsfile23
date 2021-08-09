@@ -1,0 +1,18 @@
+pipeline {
+        agent {
+            label 'xxx'
+        }
+    triggers {
+        pollSCM pipelineParams.polling
+    }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '3'))
+    }
+
+    stages {
+        stage('stage1') {
+            steps {
+                xxx
+            }
+        }
