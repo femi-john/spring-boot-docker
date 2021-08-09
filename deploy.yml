@@ -3,8 +3,8 @@
    tasks:
    - name: Transfer the app code to Docker
      copy:
-       src=/home/ansible/maven-web-app.war
-       dest=/home/ansible
+       src=/var/lib/jenkins/workspace/pipeline-docker/target/spring-boot-mongo-1.0.jar
+       dest=/home/ubuntu
      ignore_errors: yes
 
    - name: stop if we have old docker container.
@@ -14,22 +14,12 @@
    - name: remove stopped docker container
      command: docker rm java-app
      ignore_errors: yes
+   - name: remove the docker image
+     command: docker rmi app-image:1
 
    - name: building docker image
-     command: docker rmi app-image:1
-     args:
-       chdir: /home/ansible
+     command: docker build -t app-image:1
 
    - name: Creating Docker Container
      command: docker run -d --name java-app -p 90000:8080 app-image:1
      ignore_errors: yes
-
-   - name: deploying app as a docker container
-            docker_container:
-              name: java-app
-              image: mylandmarktech/spring-boot-mongo
-              state: present
-              recreate: yes
-              port:
-                - "8080:8080"
-            ignore_errors: yes
