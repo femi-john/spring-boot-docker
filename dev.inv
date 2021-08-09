@@ -1,2 +1,2 @@
 [k8s]
-35.183.131.141 ansible_user=ubuntu
+35.182.9.101 ansible_user=jenkins
