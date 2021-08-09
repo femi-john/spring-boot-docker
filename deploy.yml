@@ -6,17 +6,7 @@
        src=/var/lib/jenkins/workspace/pipeline-docker/target/spring-boot-mongo-1.0.jar
        dest=/home/ubuntu
      ignore_errors: yes
-
-   - name: stop if we have old docker container.
-     command: docker stop java-app
-     ignore_errors: yes
-
-   - name: remove stopped docker container
-     command: docker rm java-app
-     ignore_errors: yes
-   - name: remove the docker image
-     command: docker rmi app-image:1
-
+     
    - name: building docker image
      command: docker build -t app-image:1
 
