@@ -13,4 +13,11 @@
   - name: Creating Docker Container
     command: docker run -d --name java-app -p 90000:8080 app-image:1
     ignore_errors: yes
-   
+  - name: copy deployment file to kubernetes master
+    copy:
+      src: deployment.yml
+      dest: /root/
+  - name: delete the previous kubernetes objects
+    command: kubectl delete -f /root/deployment.yml
+  - name: create a deployment by reading the definition from a local file
+    command: kubectl apply -f /root/deployment.yml
