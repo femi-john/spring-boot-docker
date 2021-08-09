@@ -1,10 +1,10 @@
-- hosts: jenkins
+- hosts: k8s
   become: true
   tasks:
   - name: Transfer the app code to Docker
     copy:
       src=/var/lib/jenkins/workspace/pipeline-docker/target/spring-boot-mongo-1.0.jar
-      dest=/home/jenkins
+      dest=/root/
     ignore_errors: yes
      
   - name: building docker image
@@ -17,7 +17,7 @@
   - name: copy deployment file to kubernetes master
     copy:
       src: deployment.yml
-      dest: /home/jenkins/
+      dest: /root/
   - name: delete the previous kubernetes objects
     command: kubectl delete -f /root/deployment.yml
   - name: create a deployment by reading the definition from a local file
