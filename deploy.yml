@@ -4,11 +4,11 @@
   - name: Transfer the app code to Docker
     copy:
       src=/var/lib/jenkins/workspace/pipeline-docker/target/spring-boot-mongo-1.0.jar
-      dest=/home/ubuntu
+      dest=/home/jenkins
     ignore_errors: yes
      
   - name: building docker image
-    command: docker build -t app-image:1
+    command: docker build -t app-image:1 .
 
   - name: Creating Docker Container
     command: docker run -d --name java-app -p 90000:8080 app-image:1
